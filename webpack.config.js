@@ -4,7 +4,6 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
 	entry: {
 		main: "./src/js/main.js",
-		sketchy: "./src/js/brushes/sketchy.js",
 	},
 	output: {
 		filename: "[name].bundle.js",
@@ -34,5 +33,5 @@ module.exports = {
 			},
 		],
 	},
-	// mode: "development",
+	mode: "production",
 };
