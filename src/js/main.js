@@ -1,3 +1,19 @@
+const circles = require("./brushes/circles.js");
+const chrome = require("./brushes/chrome.js");
+const fur = require("./brushes/fur.js");
+const grid = require("./brushes/grid.js");
+const longfur = require("./brushes/longfur.js");
+const ribbon = require("./brushes/ribbon.js");
+const shaded = require("./brushes/shaded.js");
+const simple = require("./brushes/simple.js");
+const sketchy = require("./brushes/sketchy.js");
+const squares = require("./brushes/squares.js");
+const web = require("./brushes/web.js");
+const ColorSelector = require("./colorselector.js");
+const Palette = require("./palette.js");
+const Menu = require("./menu.js");
+const About = require("./about.js");
+
 const REV = 7,
 	BRUSHES = [
 		"sketchy",
@@ -108,7 +124,7 @@ function init() {
 	);
 	container.appendChild(backgroundColorSelector.container);
 
-	menu = new Menu();
+	menu = new Menu(COLOR, BACKGROUND_COLOR, BRUSHES);
 	menu.foregroundColor.addEventListener("click", onMenuForegroundColor, {
 		passive: false,
 	});
@@ -190,7 +206,7 @@ function init() {
 		brush = eval("new " + BRUSHES[0] + "(context)");
 	}
 
-	about = new About();
+	about = new About(REV);
 	container.appendChild(about.container);
 
 	window.addEventListener("mousemove", onWindowMouseMove, { passive: false });
@@ -481,7 +497,13 @@ function onCanvasMouseDown(event) {
 function onCanvasMouseMove(event) {
 	BRUSH_PRESSURE = wacom && wacom.isWacom ? wacom.pressure : 1;
 
-	brush.stroke(event.clientX * PIXEL_RATIO, event.clientY * PIXEL_RATIO);
+	brush.stroke(
+		event.clientX * PIXEL_RATIO,
+		event.clientY * PIXEL_RATIO,
+		COLOR,
+		BRUSH_SIZE,
+		BRUSH_PRESSURE
+	);
 }
 
 function onCanvasMouseUp() {
@@ -523,7 +545,10 @@ function onCanvasTouchMove(event) {
 		event.preventDefault();
 		brush.stroke(
 			event.touches[0].pageX * PIXEL_RATIO,
-			event.touches[0].pageY * PIXEL_RATIO
+			event.touches[0].pageY * PIXEL_RATIO,
+			COLOR,
+			BRUSH_SIZE,
+			BRUSH_PRESSURE
 		);
 	}
 }
