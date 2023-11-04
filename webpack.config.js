@@ -2,11 +2,15 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-	entry: "./src/js/main.js",
+	entry: {
+		main: "./src/js/main.js",
+		sketchy: "./src/js/brushes/sketchy.js",
+	},
 	output: {
-		filename: "bundle.js",
+		filename: "[name].bundle.js",
 		path: path.resolve(__dirname, "dist"),
 	},
+	target: "node", // or 'web' if the project is intended to run in the browser
 	devServer: {
 		contentBase: "./dist",
 	},
@@ -15,4 +19,20 @@ module.exports = {
 			template: "./src/index.html",
 		}),
 	],
+
+	module: {
+		rules: [
+			{
+				test: /\.js$/,
+				exclude: /node_modules/,
+				use: {
+					loader: "babel-loader",
+					options: {
+						presets: ["@babel/preset-env"],
+					},
+				},
+			},
+		],
+	},
+	mode: "development",
 };
