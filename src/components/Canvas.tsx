@@ -1,5 +1,6 @@
 "use client";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useContext } from "react";
+import { CanvasContext } from "@/core/contexts/CanvasContext";
 
 // let SCREEN_WIDTH = window.innerWidth,
 // 	SCREEN_HEIGHT = window.innerHeight,
@@ -32,8 +33,14 @@ import { useRef, useEffect, useState } from "react";
 
 const Canvas: React.FC = () => {
 	const canvasRef = useRef<HTMLCanvasElement>(null);
-
-	const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
+	const {
+		canvas,
+		canvasContext: context,
+		screenSize,
+		setCanvas,
+		setCanvasContext,
+		setScreenSize,
+	} = useContext(CanvasContext);
 	const [pixelRatio, setPixelRatio] = useState(0);
 
 	const handleResize = () => {
@@ -59,12 +66,16 @@ const Canvas: React.FC = () => {
 	}, []);
 
 	useEffect(() => {
-		const canvas = canvasRef.current;
-		const context = canvas?.getContext("2d");
+		setCanvas(canvasRef.current);
+		setCanvasContext(canvas?.getContext("2d") ?? null);
 
 		if (canvas && context) {
 			canvas.width = screenSize.width;
 			canvas.height = screenSize.height;
+
+			canvas.style.cursor = "crosshair";
+			canvas.style.width = screenSize.width + "px";
+			canvas.style.height = screenSize.height + "px";
 
 			context.fillStyle = "white";
 			context.fillRect(0, 0, canvas.width, canvas.height);
@@ -98,7 +109,28 @@ const Canvas: React.FC = () => {
 			canvas.addEventListener("mouseup", () => (isDrawing = false));
 			canvas.addEventListener("mouseout", () => (isDrawing = false));
 		}
-	}, [screenSize.height, screenSize.width]);
+	}, [
+		canvas,
+		context,
+		screenSize.height,
+		screenSize.width,
+		setCanvas,
+		setCanvasContext,
+	]);
+
+	// const setBackgroundColor = (color: number[]) => {
+	// 	var context = backgroundColor.getContext("2d");
+	// 	context.fillStyle =
+	// 		"rgb(" + color[0] + ", " + color[1] + ", " + color[2] + ")";
+	// 	context.fillRect(
+	// 		0,
+	// 		0,
+	// 		this.backgroundColor.width,
+	// 		this.backgroundColor.height
+	// 	);
+	// 	context.fillStyle = "rgba(0, 0, 0, 0.1)";
+	// 	context.fillRect(0, 0, this.backgroundColor.width, 1);
+	// };
 
 	return (
 		<canvas

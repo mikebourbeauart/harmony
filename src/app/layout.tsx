@@ -16,7 +16,9 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en">
-			<body className={inter.className}>{children}</body>
+			<body className={`bg-no-repeat bg-center ${inter.className}`}>
+				{children}
+			</body>
 		</html>
 		// <AppShell >{children}</AppShell>
 	);

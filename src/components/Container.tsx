@@ -2,8 +2,8 @@
 import { useEffect, useState } from "react";
 
 import Canvas from "@/components/Canvas";
-import { CanvasContext } from "@/core/contexts/CanvasContext";
-import AppShell from "@/core/components/AppShell";
+import { CanvasContext } from "@/core/components/CanvasContext";
+
 // let SCREEN_WIDTH = window.innerWidth,
 // 	SCREEN_HEIGHT = window.innerHeight,
 // 	PIXEL_RATIO = Math.max(1, window.devicePixelRatio),
@@ -52,10 +52,10 @@ export default function Home() {
 	// 	];
 
 	return (
-		<AppShell>
-			<main className="flex min-h-screen flex-col items-center justify-between ">
+		<main className="flex min-h-screen flex-col items-center justify-between ">
+			<CanvasContext.Provider value={{}}>
 				<Canvas />
-			</main>
-		</AppShell>
+			</CanvasContext.Provider>
+		</main>
 	);
 }
