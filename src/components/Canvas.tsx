@@ -9,6 +9,7 @@ const Canvas: React.FC = () => {
 		canvasContext: context,
 		screenSize,
 		setCanvas,
+		setCanvasRef,
 		setCanvasContext,
 		setScreenSize,
 	} = useContext(CanvasContext);
@@ -22,6 +23,7 @@ const Canvas: React.FC = () => {
 	};
 
 	useEffect(() => {
+		// Set initial screen size and pixel ratio
 		setScreenSize({
 			width: window.innerWidth,
 			height: window.innerHeight,
@@ -37,6 +39,7 @@ const Canvas: React.FC = () => {
 	}, []);
 
 	useEffect(() => {
+		setCanvasRef(canvasRef);
 		setCanvas(canvasRef.current);
 		setCanvasContext(canvas?.getContext("2d") ?? null);
 
@@ -57,6 +60,7 @@ const Canvas: React.FC = () => {
 
 			const draw = (e: MouseEvent) => {
 				if (!isDrawing) return;
+
 				context.strokeStyle = "black";
 				context.lineWidth = 2;
 				context.lineCap = "round";
@@ -86,6 +90,7 @@ const Canvas: React.FC = () => {
 		screenSize.height,
 		screenSize.width,
 		setCanvas,
+		setCanvasRef,
 		setCanvasContext,
 	]);
 

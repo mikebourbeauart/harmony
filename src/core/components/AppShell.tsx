@@ -4,6 +4,8 @@ import { useRef, useState } from "react";
 
 function AppShell({ children }: React.PropsWithChildren<{}>) {
 	const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);
+	const [canvasRef, setCanvasRef] =
+		useState<React.RefObject<HTMLCanvasElement> | null>(null);
 	const [canvasContext, setCanvasContext] =
 		useState<CanvasRenderingContext2D | null>(null);
 	const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
@@ -40,6 +42,7 @@ function AppShell({ children }: React.PropsWithChildren<{}>) {
 		<CanvasContext.Provider
 			value={{
 				canvas,
+				canvasRef,
 				canvasContext,
 				screenSize,
 				pixelRatio,
@@ -67,6 +70,7 @@ function AppShell({ children }: React.PropsWithChildren<{}>) {
 				shiftKeyIsDown,
 				altKeyIsDown,
 				setCanvas,
+				setCanvasRef,
 				setCanvasContext,
 				setScreenSize,
 			}}

@@ -3,6 +3,7 @@ import React, { createContext } from "react";
 
 type CanvasContextType = {
 	canvas: HTMLCanvasElement | null;
+	canvasRef: React.RefObject<HTMLCanvasElement> | null;
 	canvasContext: CanvasRenderingContext2D | null;
 	screenSize: { width: number; height: number };
 	pixelRatio: number;
@@ -30,6 +31,9 @@ type CanvasContextType = {
 	shiftKeyIsDown: boolean;
 	altKeyIsDown: boolean;
 	setCanvas: React.Dispatch<React.SetStateAction<HTMLCanvasElement | null>>;
+	setCanvasRef: React.Dispatch<
+		React.SetStateAction<React.RefObject<HTMLCanvasElement> | null>
+	>;
 	setCanvasContext: React.Dispatch<
 		React.SetStateAction<CanvasRenderingContext2D | null>
 	>;
@@ -40,6 +44,7 @@ type CanvasContextType = {
 
 const initialCanvasContext: CanvasContextType = {
 	canvas: null,
+	canvasRef: null,
 	canvasContext: null,
 	screenSize: { width: 0, height: 0 },
 	pixelRatio: 0,
@@ -67,6 +72,7 @@ const initialCanvasContext: CanvasContextType = {
 	shiftKeyIsDown: false,
 	altKeyIsDown: false,
 	setCanvas: () => {},
+	setCanvasRef: () => {},
 	setCanvasContext: () => {},
 	setScreenSize: () => {},
 };
