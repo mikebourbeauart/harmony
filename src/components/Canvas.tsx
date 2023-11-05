@@ -8,6 +8,7 @@ const Canvas: React.FC = () => {
 		canvas,
 		canvasContext: context,
 		screenSize,
+		color,
 		setCanvas,
 		setCanvasRef,
 		setCanvasContext,
@@ -61,7 +62,7 @@ const Canvas: React.FC = () => {
 			const draw = (e: MouseEvent) => {
 				if (!isDrawing) return;
 
-				context.strokeStyle = "black";
+				context.strokeStyle = color;
 				context.lineWidth = 2;
 				context.lineCap = "round";
 
@@ -86,6 +87,7 @@ const Canvas: React.FC = () => {
 		}
 	}, [
 		canvas,
+		color,
 		context,
 		screenSize.height,
 		screenSize.width,

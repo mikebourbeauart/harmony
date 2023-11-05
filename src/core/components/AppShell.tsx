@@ -12,7 +12,7 @@ function AppShell({ children }: React.PropsWithChildren<{}>) {
 	const [pixelRatio, setPixelRatio] = useState(0);
 	const [brushSize, setBrushSize] = useState(1);
 	const [brushPressure, setBrushPressure] = useState(1);
-	const [color, setColor] = useState([0, 0, 0]);
+	const [color, setColor] = useState("#0af42d");
 	const [backgroundColor, setBackgroundColor] = useState([250, 250, 250]);
 	const [storage, setStorage] = useState(null);
 	const [brush, setBrush] = useState(null);
@@ -69,6 +69,7 @@ function AppShell({ children }: React.PropsWithChildren<{}>) {
 				isMenuMouseOver,
 				shiftKeyIsDown,
 				altKeyIsDown,
+				setColor,
 				setCanvas,
 				setCanvasRef,
 				setCanvasContext,

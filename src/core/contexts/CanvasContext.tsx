@@ -9,7 +9,7 @@ type CanvasContextType = {
 	pixelRatio: number;
 	brushSize: number;
 	brushPressure: number;
-	color: number[];
+	color: string;
 	backgroundColor: number[];
 	storage: Storage | null;
 	brush: any;
@@ -30,6 +30,7 @@ type CanvasContextType = {
 	isMenuMouseOver: boolean;
 	shiftKeyIsDown: boolean;
 	altKeyIsDown: boolean;
+	setColor: React.Dispatch<React.SetStateAction<string>>;
 	setCanvas: React.Dispatch<React.SetStateAction<HTMLCanvasElement | null>>;
 	setCanvasRef: React.Dispatch<
 		React.SetStateAction<React.RefObject<HTMLCanvasElement> | null>
@@ -50,7 +51,7 @@ const initialCanvasContext: CanvasContextType = {
 	pixelRatio: 0,
 	brushSize: 1,
 	brushPressure: 1,
-	color: [0, 0, 0],
+	color: "",
 	backgroundColor: [250, 250, 250],
 	storage: null,
 	brush: null,
@@ -71,6 +72,7 @@ const initialCanvasContext: CanvasContextType = {
 	isMenuMouseOver: false,
 	shiftKeyIsDown: false,
 	altKeyIsDown: false,
+	setColor: () => {},
 	setCanvas: () => {},
 	setCanvasRef: () => {},
 	setCanvasContext: () => {},
